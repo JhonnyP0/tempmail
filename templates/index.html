@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temp-Mail</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+</head>
+<body class="has-background-white-ter" style="min-height: 100vh;">
+    <section class="section">
+        <div class="container is-max-desktop">
+            
+            <div class="box has-text-centered is-shadowless" style="border: 2px dashed #dbdbdb;">
+                <p class="heading is-size-6">Your e-mail</p>
+                <div class="notification is-link is-light mt-3 mb-3">
+                    <p class="is-size-3 has-text-weight-bold" style="word-break: break-all;">
+                        {{ email }}
+                    </p>
+                </div>
+                <button class="button is-link is-outlined" onclick="window.location.reload();">
+                    Refresh
+                </button>
+                <p class="help mt-2">Cookies prevents your email to vanish (24h)</p>
+            </div>
+
+            <h2 class="title is-4 mt-6">Recived</h2>
+            
+            {% if messages %}
+                <div class="content">
+                    {% for msg in messages %}
+                        <div class="box is-shadowless" style="border: 1px solid #ededed; border-left: 4px solid #485fc7;">
+                            <div class="columns is-mobile is-vcentered mb-1">
+                                <div class="column">
+                                    <p class="mb-0"><strong>From:</strong> {{ msg.sender }}</p>
+                                    <p class="is-size-5 has-text-weight-semibold mb-0">{{ msg.subject }}</p>
+                                </div>
+                                <div class="column is-narrow">
+                                    <span class="tag is-light">{{ msg.received_at.strftime('%H:%M:%S') }}</span>
+                                </div>
+                            </div>
+                            <hr class="mt-2 mb-3">
+                            <div style="white-space: pre-wrap; font-family: monospace; font-size: 0.95rem;">{{ msg.body_text }}</div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="notification is-warning is-light has-text-centered py-6">
+                    <p class="is-size-5">Nothing here yet</p>
+                    <p class="is-size-6 mt-2">Waiting for e-mails</p>
+                </div>
+            {% endif %}
+
+        </div>
+    </section>
+</body>
+</html>
