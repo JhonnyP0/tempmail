@@ -67,7 +67,7 @@ def home(
 def mailgun_webhook(
     recipient: str = Form(...),
     sender: str = Form(...),
-    subject: str = Form(default="(Brak tematu)"),
+    subject: str = Form(default="No title"),
     body_plain: str = Form(alias="body-plain", default=""),
     db: Session = Depends(get_db)
 ):
